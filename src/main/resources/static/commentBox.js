@@ -101,10 +101,48 @@ var CommentBox = React.createClass({displayName: "CommentBox",
     }
 });
 
+var NavBar = React.createClass({
+    render: function () {
+        return (
+            <nav className="navbar navbar-default upNavbar">
+                <div className="navbar-header">
+                    <a className="navbar-brand" href="/">Investify</a>
+                </div>
+
+                <div>
+                    <ul className="nav navbar-nav">
+                        <li><a href="/">Főoldal</a></li>
+                        <li><a href="/faq">Rendszerünk működése</a></li>
+                    </ul>
+                    <ul className="nav navbar-nav">
+                        <li><a href="/">Dashboard</a></li>
+                        <li><a href="/investments">Befektetéseid</a></li>
+                        <li><a href="/shareholds">Shareholdjaid</a></li>
+                        <li><a href="/market">Market</a></li>
+                        <li><a href="/collections">Gyűjtések</a></li>
+                    </ul>
+                </div>
+
+                <div className="mnavbar-right">
+                    <div>
+                        <a href="/registration" className="btn btn-info">Regisztráció</a>
+                        <a href="/login" className="btn btn-success">Belépés</a>
+                    </div>
+                    <div>
+                        <a className="btn btn-success" href="/payin">Befizetés</a>
+                        <a className="btn btn-danger" href="/logout">Kijelentkezés</a>
+                    </div>
+                </div>
+            </nav>
+        );
+    }
+});
+
 var renderClient = function (comments) {
     var data = comments || [];
     React.render(
-        React.createElement(CommentBox, {data: data, url: "comments.json", pollInterval: 5000}),
+        // React.createElement(CommentBox, {data: data, url: "comments.json", pollInterval: 5000}),
+        React.createElement(NavBar),
         document.getElementById("content")
     );
 };
@@ -112,6 +150,6 @@ var renderClient = function (comments) {
 var renderServer = function (comments) {
     var data = Java.from(comments);
     return React.renderToString(
-        React.createElement(CommentBox, {data: data, url: "comments.json", pollInterval: 5000})
+        React.createElement(NavBar)
     );
 };
